@@ -26,4 +26,23 @@ describe("MyToken contract", function () {
             expect(balances[1].toNumber()).to.equal(200);
         });
     });
+
+    describe("New Token", function(){
+        it("Should create a new token with supply of 1 and assign it to the contract owner", async function (){
+            await mytoken.createToken(1);
+            const newBalance = await mytoken.balanceOf(owner.address, 3);
+            expect(newBalance.toNumber()).to.equal(1);
+        });
+    });
+
+    describe("Get URI", function(){
+        it("Should return the uri for given token type", async function(){
+            let id = 0;
+            let uri = await mytoken.uri(id);
+            id = ethers.utils.defaultAbiCoder.encode(['uint256'],[id]).substring(2);
+            uri = uri.replace("{id}", id);
+            //console.log(uri);
+            expect(uri).to.equal("http://127.0.0.1:8000/0000000000000000000000000000000000000000000000000000000000000000.json");           
+        });
+    });
 });
