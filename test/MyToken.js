@@ -10,7 +10,7 @@ describe("MyToken contract", function () {
         [owner, addr1, addr2] = await ethers.getSigners();
         mytoken = await MyToken.deploy();
     });
-
+    // Comment
     describe("Deployment", function() {
         it("Should assign all tokens to the deployer", async function (){
             const ownerBalances = await mytoken.balanceOfBatch([owner.address, owner.address, owner.address], [0,1,2]);
